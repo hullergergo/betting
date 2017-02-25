@@ -1,0 +1,74 @@
+<div class="container" id="newGameInputField">
+   <div class="row">
+      <div class="col-md-4 col-lg-4" align="center">
+         <form class=" input-form form-horizontal">
+            <div class="form-group">
+               <label class="col-sm-2 control-label">Hazai</label>
+               <div class="col-sm-8">
+                  <select class="form-control" type="text" name="hometeam" ng-model="checkHomeTeam" ng-change="searchTeam()">
+                     <option ng-repeat="team in teams" value="{{team.sname}}">{{team.name}}</option>
+                  </select>
+               </div>
+            </div>
+            <div class="form-group">
+               <label class="col-sm-2 control-label">Vendeg</label>
+               <div class="col-sm-8">
+                  <select class="form-control" type="text" name="awayteam" ng-model="checkAwayTeam" ng-change="searchTeam()">
+                     <option ng-repeat="team in teams" value="{{team.sname}}">{{team.name}}</option>
+                  </select>
+               </div>
+            </div>
+            <div class="form-group">
+               <label class="col-sm-2 control-label">Odds</label>
+               <div class="col-sm-8">
+                  <input class="form-control" type="number" name="odds" ng-model="matchOdds">
+               </div>
+            </div>
+            <div>
+               <label>Minden meccs (pipa nelkul csak az utolso 5)</label>
+               <input type="checkbox" name="allmatch" ng-model="allMatchCB">
+            </div>
+            <div>
+               <label>Hazai - vendeg</label>
+               <input type="checkbox" name="homeaway" ng-model="homeAway">
+            </div>
+            <div class="form-group">
+               <div class="col-sm-12" align="center">
+                  <Button class="btn btn-default"  type="submit" ng-click="checkGame()"> Submit</Button>
+               </div>
+            </div>
+         </form>
+      </div>
+      <div class="col-md-8 col-lg-8" align="center">
+         <div ng-repeat="data in tableData">
+            <div class="bg-info info" id="resultTable">
+               <span>{{data.homeTeam}} - {{data.awayTeam}} : atlag: {{data.avg}} ---- odds:{{data.odds}} ---- diff: {{data.avg-data.odds}}</span>
+               <button type="button" class="close" aria-label="Close"><span ng-click="selectMatch(data)" aria-hidden="true">&#xe086;</span></button>  
+               <button type="button" class="close" aria-label="Close"><span ng-click="remove(data.index)" aria-hidden="true">&times;</span></button>
+            </div>
+            <div id="selectedMatch" ng-show="data.show">
+               <span>Hazai: {{selectedData.homeT}}</span>
+               <br>
+               <span>Dobott pont: {{selectedData.homeS}}</span>
+               <br>
+               <span>Kapott pont: {{selectedData.homeGS}}</span>
+               <br>
+               <span>Meccsszam: {{selectedData.homeNumber}}</span>
+               <br>
+               <span>Vendeg: {{selectedData.awayT}}</span>
+               <br>
+               <span>Dobott pont: {{selectedData.awayS}}</span>
+               <br>
+               <span>Kapott pont {{selectedData.awayGS}}</span>
+               <br>
+               <span>Meccsszam: {{selectedData.awayNumber}}</span>
+               <br>
+               <span>atlag: {{selectedData.avg}}</span>
+               <br>
+               <span>Odds: {{selectedData.odds}}</span>
+               <br>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
